@@ -1,0 +1,321 @@
+/* ===================================
+   April Studio & Cafe - Custom Styles
+   "Urban Elegance" Design System
+   =================================== */
+
+/* Hide elements with x-cloak until Alpine.js loads */
+[x-cloak] {
+    display: none !important;
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+/* Fade In Up Animation */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered animations for children */
+.fade-in-up:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.fade-in-up:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.fade-in-up:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.fade-in-up:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Fade In Animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Slide In from Right (for mobile menu) */
+.slide-in-right {
+    transform: translateX(100%);
+    animation: slideInRight 0.3s ease-out forwards;
+}
+
+@keyframes slideInRight {
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* ===================================
+   SCROLL BEHAVIOR
+   =================================== */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    /* Account for fixed navbar */
+}
+
+/* ===================================
+   TYPOGRAPHY ENHANCEMENTS
+   =================================== */
+
+/* Selection styling */
+::selection {
+    background-color: #FFB7C5;
+    color: #2D2D2D;
+}
+
+::-moz-selection {
+    background-color: #FFB7C5;
+    color: #2D2D2D;
+}
+
+/* ===================================
+   CUSTOM SCROLLBAR
+   =================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #F2C7C7;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FFB7C5;
+}
+
+/* ===================================
+   BUTTON EFFECTS
+   =================================== */
+
+/* Subtle hover lift effect */
+a[href^="#"],
+button {
+    transition: all 0.3s ease;
+}
+
+/* ===================================
+   IMAGE EFFECTS  
+   =================================== */
+
+/* Grayscale hover effect for images */
+.image-grayscale {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.image-grayscale:hover {
+    filter: grayscale(0%);
+}
+
+/* ===================================
+   LOADING STATE
+   =================================== */
+
+/* Skeleton loading effect */
+.skeleton {
+    background: linear-gradient(90deg,
+            #E8E6E3 25%,
+            #F9F9F7 50%,
+            #E8E6E3 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+
+/* Text balance for better typography */
+.text-balance {
+    text-wrap: balance;
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(135deg, #FFB7C5 0%, #D5F3D8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+    background: rgba(249, 249, 247, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* ===================================
+   MASONRY GRID ENHANCEMENT
+   =================================== */
+
+@supports (grid-template-rows: masonry) {
+    .masonry-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: masonry;
+        gap: 1rem;
+    }
+}
+
+/* ===================================
+   LENIS SMOOTH SCROLL
+   =================================== */
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* ===================================
+   CUSTOM CURSOR (DESKTOP)
+   =================================== */
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    transition: transform 0.15s ease;
+}
+
+.cursor-dot {
+    display: block;
+    animation: cursorFloat 2s ease-in-out infinite;
+}
+
+.cursor-hover .cursor-dot {
+    animation: cursorPop 0.3s ease forwards;
+}
+
+@keyframes cursorFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-3px) rotate(10deg);
+    }
+}
+
+@keyframes cursorPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-cursor {
+        display: none !important;
+    }
+}
+
+/* ===================================
+   MOBILE OPTIMIZATIONS
+   =================================== */
+
+@media (max-width: 768px) {
+
+    /* Faster animations on mobile */
+    * {
+        transition-duration: 0.2s !important;
+    }
+
+    /* Reduce blur effects for performance */
+    .backdrop-blur-xl {
+        backdrop-filter: blur(8px);
+    }
+
+    .blur-3xl {
+        filter: blur(40px);
+    }
+
+    /* Optimize touch targets */
+    a,
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
