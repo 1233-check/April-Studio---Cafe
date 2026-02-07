@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>April Studio & Cafe | Curated Coffee. Creative Soul. ✨</title>
+    <meta name="description"
+        content="Experience the distinct urban edge and cozy comfort of Dimapur's most aesthetic cafe and creative studio. Artisan coffee, wholesome food, and a sanctuary for creators.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blush': '#F2C7C7',
+                        'pure-white': '#FFFFFF',
+                        'mint': '#D5F3D8',
+                        'rose': '#FFB7C5',
+                        'charcoal': '#2D2D2D',
+                        'soft-charcoal': '#4A4A4A',
+                    },
+                    fontFamily: {
+                        'syne': ['Syne', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- GSAP + ScrollTrigger for scroll animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis for smooth scrolling -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-pure-white text-charcoal font-inter antialiased overflow-x-hidden"
+    x-data="{ mobileMenuOpen: false, currentReview: 0 }">
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-pure-white/90 backdrop-blur-xl border-b border-blush/30 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home"
+                    class="font-syne font-bold text-lg tracking-wide text-charcoal hover:text-rose transition-colors flex items-center gap-2">
+                    <span class="text-2xl">🌸</span> <span class="hidden sm:inline">April Studio & Cafe</span><span
+                        class="sm:hidden">April</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home"
+                        class="text-sm font-medium text-charcoal hover:text-rose transition-colors relative group">
+                        Home
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#menu"
+                        class="text-sm font-medium text-charcoal hover:text-rose transition-colors relative group">
+                        Menu
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#studio"
+                        class="text-sm font-medium text-charcoal hover:text-rose transition-colors relative group">
+                        Studio
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#vibe"
+                        class="text-sm font-medium text-charcoal hover:text-rose transition-colors relative group">
+                        Vibe Check
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#visit"
+                        class="text-sm font-medium text-charcoal hover:text-rose transition-colors relative group">
+                        Find Us
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose transition-all group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- Reserve Button (Desktop) - Gen Z style -->
+                <a href="#visit"
+                    class="hidden md:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-rose to-blush text-charcoal text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-rose/30 hover:scale-105 transition-all duration-300">
+                    <span>Book a Spot</span>
+                    <span>→</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="md:hidden p-2 hover:bg-blush/20 rounded-xl transition-colors" aria-label="Toggle menu">
+                    <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu - Slide from right -->
+        <div x-show="mobileMenuOpen" x-cloak x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-x-0"
+            x-transition:leave-end="opacity-0 translate-x-full"
+            class="fixed inset-y-0 right-0 w-80 bg-gradient-to-b from-pure-white to-blush/30 shadow-2xl md:hidden backdrop-blur-xl">
+            <div class="flex flex-col h-full pt-28 px-8">
+                <a @click="mobileMenuOpen = false" href="#home"
+                    class="py-4 text-xl font-syne font-semibold text-charcoal hover:text-rose transition-colors flex items-center gap-3">
+                    <span>🏠</span> Home
+                </a>
+                <a @click="mobileMenuOpen = false" href="#menu"
+                    class="py-4 text-xl font-syne font-semibold text-charcoal hover:text-rose transition-colors flex items-center gap-3">
+                    <span>☕</span> Menu
+                </a>
+                <a @click="mobileMenuOpen = false" href="#studio"
+                    class="py-4 text-xl font-syne font-semibold text-charcoal hover:text-rose transition-colors flex items-center gap-3">
+                    <span>🎨</span> Studio
+                </a>
+                <a @click="mobileMenuOpen = false" href="#vibe"
+                    class="py-4 text-xl font-syne font-semibold text-charcoal hover:text-rose transition-colors flex items-center gap-3">
+                    <span>✨</span> Vibe Check
+                </a>
+                <a @click="mobileMenuOpen = false" href="#visit"
+                    class="py-4 text-xl font-syne font-semibold text-charcoal hover:text-rose transition-colors flex items-center gap-3">
+                    <span>📍</span> Find Us
+                </a>
+                <a @click="mobileMenuOpen = false" href="#visit"
+                    class="mt-8 py-4 px-6 bg-gradient-to-r from-rose to-blush text-center font-semibold text-charcoal rounded-full shadow-lg">
+                    Book a Spot ✨
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Animated Background Blobs -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <div class="absolute top-20 -left-20 w-96 h-96 bg-rose/30 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 -right-20 w-80 h-80 bg-mint/40 rounded-full blur-3xl animate-float"
+                style="animation-delay: -3s;"></div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blush/20 rounded-full blur-3xl">
+            </div>
+        </div>
+
+        <!-- Minimalist Decorative Elements -->
+        <div class="absolute top-32 right-10 w-24 h-24 border-2 border-blush/30 rounded-full"></div>
+        <div class="absolute bottom-40 left-16 w-16 h-16 bg-mint/20 rounded-full blur-sm"></div>
+        <div class="absolute top-1/3 right-1/4 w-3 h-3 bg-rose rounded-full"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-2 h-2 bg-charcoal/20 rounded-full"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <!-- Badge -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 bg-pure-white/80 backdrop-blur-sm rounded-full border border-blush mb-8 shadow-lg">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span class="text-sm font-medium text-charcoal">Now Open in Dimapur ✨</span>
+            </div>
+
+            <h1 class="font-syne font-extrabold text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-8 text-charcoal">
+                Where Coffee<br>
+                Meets <span
+                    class="bg-gradient-to-r from-rose via-blush to-mint bg-clip-text text-transparent">Creativity</span>
+            </h1>
+
+            <p class="font-inter text-lg md:text-xl text-soft-charcoal max-w-2xl mx-auto mb-10 leading-relaxed">
+                Dimapur's most aesthetic cafe & creative studio. Sip, create, and vibe with us.
+                <span class="inline-block animate-bounce">☕</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <a href="#menu"
+                    class="group px-8 py-4 bg-charcoal text-pure-white font-semibold rounded-full hover:bg-rose hover:text-charcoal transition-all duration-300 flex items-center gap-2 shadow-xl hover:shadow-rose/30 hover:scale-105">
+                    <span>Explore Menu</span>
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </a>
+                <a href="#vibe"
+                    class="group px-8 py-4 bg-pure-white/80 backdrop-blur-sm border-2 border-charcoal text-charcoal font-semibold rounded-full hover:bg-charcoal hover:text-pure-white transition-all duration-300 flex items-center gap-2">
+                    <span>Our Vibe</span>
+                    <span class="text-xl">🌸</span>
+                </a>
+            </div>
+
+            <!-- Social Proof -->
+            <div class="flex items-center justify-center gap-6 pt-8 border-t border-blush/50">
+                <div class="flex -space-x-3">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                        class="w-10 h-10 rounded-full border-2 border-pure-white" alt="">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                        class="w-10 h-10 rounded-full border-2 border-pure-white" alt="">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
+                        class="w-10 h-10 rounded-full border-2 border-pure-white" alt="">
+                    <div
+                        class="w-10 h-10 rounded-full border-2 border-pure-white bg-rose flex items-center justify-center text-xs font-bold text-charcoal">
+                        99+</div>
+                </div>
+                <div class="text-left">
+                    <div class="flex items-center gap-1 text-yellow-500">
+                        <span>★★★★★</span>
+                    </div>
+                    <p class="text-sm text-soft-charcoal">Loved by 500+ visitors</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <div class="flex flex-col items-center gap-2 text-charcoal/60">
+                <span class="text-xs tracking-widest uppercase">Scroll</span>
+                <div class="w-6 h-10 border-2 border-charcoal/30 rounded-full flex justify-center pt-2">
+                    <div class="w-1 h-2 bg-charcoal/50 rounded-full animate-bounce"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== THE VIBE SECTION ========== -->
+    <section id="vibe" class="py-24 lg:py-32 bg-gradient-to-b from-blush/20 to-pure-white relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-10 right-10 text-6xl opacity-10 animate-float">🌿</div>
+        <div class="absolute bottom-10 left-10 text-6xl opacity-10 animate-float" style="animation-delay: -2s;">☕</div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div class="fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-mint/30 rounded-full mb-6">
+                        <span class="text-lg">✨</span>
+                        <span class="text-sm font-medium text-charcoal">Vibe Check</span>
+                    </div>
+
+                    <h2 class="font-syne font-bold text-4xl md:text-5xl lg:text-6xl text-charcoal mb-8 leading-tight">
+                        Your New<br>
+                        <span class="text-rose">Comfort Zone</span>
+                    </h2>
+
+                    <p class="text-soft-charcoal text-lg leading-relaxed mb-6">
+                        No cap — April is where the magic happens. Whether you're grinding on your next big project,
+                        vibing with the squad, or just need some main character energy moments — we've got you. 🙌
+                    </p>
+
+                    <p class="text-soft-charcoal text-lg leading-relaxed mb-8">
+                        Industrial aesthetic meets cozy core. Think exposed concrete, golden hour lighting, and
+                        playlists that actually slap.
+                    </p>
+
+                    <!-- Stats with Gen Z flair -->
+                    <div
+                        class="flex flex-wrap items-center gap-6 p-6 bg-pure-white rounded-2xl shadow-lg border border-blush/30">
+                        <div class="text-center">
+                            <p class="font-syne font-bold text-4xl text-charcoal">50+</p>
+                            <p class="text-sm text-soft-charcoal">Drinks 🍵</p>
+                        </div>
+                        <div class="w-px h-12 bg-blush"></div>
+                        <div class="text-center">
+                            <p class="font-syne font-bold text-4xl text-charcoal">100%</p>
+                            <p class="text-sm text-soft-charcoal">Aesthetic ✨</p>
+                        </div>
+                        <div class="w-px h-12 bg-blush"></div>
+                        <div class="text-center">
+                            <p class="font-syne font-bold text-4xl text-charcoal">∞</p>
+                            <p class="text-sm text-soft-charcoal">Good Vibes 💫</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Grid - Bento Style -->
+                <div class="grid grid-cols-6 grid-rows-4 gap-4 h-[600px]">
+                    <div class="col-span-4 row-span-2 overflow-hidden rounded-3xl group shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=800&h=600&fit=crop"
+                            alt="Cafe Interior"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="col-span-2 row-span-2 overflow-hidden rounded-3xl group shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=500&fit=crop"
+                            alt="Latte Art"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="col-span-2 row-span-2 overflow-hidden rounded-3xl group shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=500&fit=crop"
+                            alt="Plants"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="col-span-4 row-span-2 overflow-hidden rounded-3xl group shadow-xl relative">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=400&fit=crop"
+                            alt="Coffee Shop"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent flex items-end p-6">
+                            <p class="text-pure-white font-syne font-semibold text-xl">📍 Dimapur's Aesthetic Hub</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MENU HIGHLIGHTS ========== -->
+    <section id="menu"
+        class="py-24 lg:py-32 bg-gradient-to-b from-pure-white via-mint/20 to-pure-white relative overflow-hidden">
+        <!-- Decorative -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose via-blush to-mint"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-rose/20 rounded-full mb-6">
+                    <span class="text-lg">🍰</span>
+                    <span class="text-sm font-medium text-charcoal">Sweet Station</span>
+                </div>
+
+                <h2 class="font-syne font-bold text-4xl md:text-5xl lg:text-6xl text-charcoal mb-6">
+                    The Menu <span class="text-rose">Hits Different</span>
+                </h2>
+                <p class="text-soft-charcoal text-lg max-w-2xl mx-auto">
+                    From artisan lattes to gourmet eats — every bite and sip is curated for your IG feed. 📸
+                </p>
+            </div>
+
+            <!-- Menu Grid - Card Style -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Artisan Lattes -->
+                <div
+                    class="group bg-pure-white rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-rose/20 transition-all duration-500 border border-blush/30 hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=400&h=400&fit=crop"
+                            alt="Artisan Lattes"
+                            class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 bg-pure-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-charcoal">
+                            ⭐ Bestseller
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-syne font-bold text-xl text-charcoal mb-2">Artisan Lattes ☕</h3>
+                        <p class="text-soft-charcoal text-sm leading-relaxed mb-4">Hazelnut, Vanilla, seasonal drops.
+                            Your barista is lowkey an artist.</p>
+                        <div class="flex items-center justify-end">
+                            <span class="text-2xl text-rose group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Wholesome Bowls -->
+                <div
+                    class="group bg-pure-white rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-mint/30 transition-all duration-500 border border-mint/30 hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=400&fit=crop"
+                            alt="Wholesome Bowls"
+                            class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 bg-mint/90 backdrop-blur-sm rounded-full text-xs font-medium text-charcoal">
+                            🥗 Healthy
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-syne font-bold text-xl text-charcoal mb-2">Wholesome Bowls 🥑</h3>
+                        <p class="text-soft-charcoal text-sm leading-relaxed mb-4">Farm-fresh greens, house-made
+                            dressings. Eating clean never looked this good.</p>
+                        <div class="flex items-center justify-end">
+                            <span class="text-2xl text-mint group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Gourmet Toasts -->
+                <div
+                    class="group bg-pure-white rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-rose/20 transition-all duration-500 border border-blush/30 hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=400&fit=crop"
+                            alt="Gourmet Toasts"
+                            class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 bg-pure-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-charcoal">
+                            🔥 Trending
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-syne font-bold text-xl text-charcoal mb-2">Gourmet Toasts 🍞</h3>
+                        <p class="text-soft-charcoal text-sm leading-relaxed mb-4">Sourdough stacked with premium
+                            toppings. Avocado toast energy but elevated.</p>
+                        <div class="flex items-center justify-end">
+                            <span class="text-2xl text-rose group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Sweet Station -->
+                <div
+                    class="group bg-pure-white rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-rose/20 transition-all duration-500 border border-rose/30 hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=400&fit=crop"
+                            alt="Sweet Station"
+                            class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 bg-rose/90 backdrop-blur-sm rounded-full text-xs font-medium text-charcoal">
+                            💖 Fan Fav
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-syne font-bold text-xl text-charcoal mb-2">Sweet Station 🍪</h3>
+                        <p class="text-soft-charcoal text-sm leading-relaxed mb-4">Choco-chip cookies, fresh cakes,
+                            daily specials. Treat yourself, bestie.</p>
+                        <div class="flex items-center justify-end">
+                            <span class="text-2xl text-rose group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center mt-12">
+                <a href="#visit"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-charcoal text-pure-white font-semibold rounded-full hover:bg-rose hover:text-charcoal transition-all duration-300 shadow-xl hover:shadow-rose/30">
+                    <span>View Full Menu</span>
+                    <span>📋</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== THE STUDIO SECTION ========== -->
+    <section id="studio" class="py-24 lg:py-32 bg-charcoal text-pure-white relative overflow-hidden">
+        <!-- Decorative Blobs -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-rose/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-mint/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Image with overlay -->
+                <div class="order-2 lg:order-1 relative">
+                    <div class="overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=900&fit=crop"
+                            alt="The Studio"
+                            class="w-full h-[550px] object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <!-- Floating Card -->
+                    <div class="absolute -bottom-6 -right-6 bg-pure-white rounded-2xl p-6 shadow-2xl max-w-[200px]">
+                        <p class="text-charcoal font-syne font-bold text-lg mb-1">Shop Local 🛍️</p>
+                        <p class="text-soft-charcoal text-sm">Curated finds from NE artisans</p>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="order-1 lg:order-2">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-rose/20 rounded-full mb-6">
+                        <span class="text-lg">🎨</span>
+                        <span class="text-sm font-medium text-pure-white">The Studio</span>
+                    </div>
+
+                    <h2 class="font-syne font-bold text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight">
+                        Art You Can<br>
+                        <span class="bg-gradient-to-r from-rose to-mint bg-clip-text text-transparent">Actually
+                            Wear</span>
+                    </h2>
+
+                    <p class="text-pure-white/80 text-lg leading-relaxed mb-6">
+                        Beyond coffee, we're a creative hub. Think boutique meets gallery meets your Pinterest board
+                        IRL. Every piece tells a story.
+                    </p>
+
+                    <p class="text-pure-white/80 text-lg leading-relaxed mb-8">
+                        From handcrafted jewelry to limited prints — find unique pieces that match your main character
+                        era. ✨
+                    </p>
+
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center gap-4 p-4 bg-pure-white/5 rounded-2xl backdrop-blur-sm">
+                            <span class="w-10 h-10 bg-rose/20 rounded-full flex items-center justify-center">🎭</span>
+                            <span class="text-pure-white/90 font-medium">Local Artisan Collections</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-4 bg-pure-white/5 rounded-2xl backdrop-blur-sm">
+                            <span class="w-10 h-10 bg-mint/20 rounded-full flex items-center justify-center">👗</span>
+                            <span class="text-pure-white/90 font-medium">Limited Edition Fashion</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-4 bg-pure-white/5 rounded-2xl backdrop-blur-sm">
+                            <span class="w-10 h-10 bg-blush/20 rounded-full flex items-center justify-center">🖼️</span>
+                            <span class="text-pure-white/90 font-medium">Art Prints & Decor</span>
+                        </li>
+                    </ul>
+
+                    <a href="#visit"
+                        class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose to-blush text-charcoal font-semibold rounded-full hover:shadow-lg hover:shadow-rose/30 hover:scale-105 transition-all duration-300">
+                        <span>Explore Studio</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== REVIEWS / SOCIAL PROOF ========== -->
+    <section
+        class="py-24 lg:py-32 bg-gradient-to-b from-pure-white via-blush/10 to-pure-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-rose/20 rounded-full mb-6">
+                <span class="text-lg">💬</span>
+                <span class="text-sm font-medium text-charcoal">Real Reviews</span>
+            </div>
+
+            <h2 class="font-syne font-bold text-4xl md:text-5xl lg:text-6xl text-charcoal mb-4">
+                The People Have <span class="text-rose">Spoken</span>
+            </h2>
+            <p class="text-soft-charcoal text-lg mb-16">Don't just take our word for it — here's what the fam says 🙌
+            </p>
+
+            <!-- Review Slider -->
+            <div class="relative" x-data="{ reviews: [
+                { text: 'Literally obsessed with this place! The interior is *chef\\'s kiss* and the hazelnut latte? Unmatched. 10/10 would live here.', author: 'Anya M.', role: 'Designer', emoji: '💅' },
+                { text: 'Best coffee in Dimapur, no debate. Plus the vibes are immaculate. My go-to WFH spot now.', author: 'Rohan K.', role: 'Creative Director', emoji: '🔥' },
+                { text: 'Every corner is literally Instagram-worthy. Got like 200+ likes on my April post. The food slaps too!', author: 'Priya S.', role: 'Content Creator', emoji: '📸' },
+                { text: 'Finally a cafe that understands aesthetics AND good coffee. The cookies are lowkey addictive.', author: 'Dev T.', role: 'Student', emoji: '🍪' }
+            ]}">
+                <div class="bg-pure-white rounded-3xl p-8 md:p-12 shadow-xl border border-blush/30">
+                    <template x-for="(review, index) in reviews" :key="index">
+                        <div x-show="currentReview === index" x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 transform translate-y-4"
+                            x-transition:enter-end="opacity-100 transform translate-y-0"
+                            x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0">
+                            <div class="text-6xl mb-6" x-text="review.emoji"></div>
+                            <p class="font-syne text-xl md:text-2xl lg:text-3xl text-charcoal leading-relaxed mb-8"
+                                x-text="review.text"></p>
+                            <div class="flex items-center justify-center gap-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-rose to-blush rounded-full flex items-center justify-center text-xl font-bold text-charcoal"
+                                    x-text="review.author.charAt(0)"></div>
+                                <div class="text-left">
+                                    <p class="font-inter font-semibold text-charcoal" x-text="review.author"></p>
+                                    <p class="text-sm text-soft-charcoal" x-text="review.role"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Dots Navigation -->
+                <div class="flex items-center justify-center gap-3 mt-8">
+                    <template x-for="(review, index) in reviews" :key="index">
+                        <button @click="currentReview = index"
+                            :class="currentReview === index ? 'bg-rose w-10' : 'bg-blush w-3'"
+                            class="h-3 rounded-full transition-all duration-300 hover:bg-rose/70"
+                            :aria-label="'Go to review ' + (index + 1)">
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Auto-advance -->
+                <div x-init="setInterval(() => { currentReview = (currentReview + 1) % reviews.length }, 5000)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== INSTAGRAM CTA ========== -->
+    <section class="py-16 bg-gradient-to-r from-rose via-blush to-mint">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="font-syne font-bold text-3xl md:text-4xl text-charcoal mb-4">
+                Follow the Aesthetic ✨
+            </h3>
+            <p class="text-charcoal/80 text-lg mb-8">Tag us @aprilstudioandcafe — best pics get featured!</p>
+            <a href="https://www.instagram.com/aprilstudioandcafe" target="_blank" rel="noopener"
+                class="inline-flex items-center gap-3 px-8 py-4 bg-charcoal text-pure-white font-semibold rounded-full hover:bg-pure-white hover:text-charcoal transition-all duration-300 shadow-xl">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+                <span>@aprilstudioandcafe</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER / VISIT US ========== -->
+    <footer id="visit" class="py-24 lg:py-32 bg-charcoal text-pure-white relative overflow-hidden">
+        <!-- Decorative -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose via-blush to-mint"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="lg:col-span-2">
+                    <a href="#home" class="inline-flex items-center gap-2 mb-6">
+                        <span class="text-4xl">🌸</span>
+                        <span class="font-syne font-bold text-2xl tracking-wide text-pure-white">April Studio &
+                            Cafe</span>
+                    </a>
+                    <p class="text-pure-white/70 text-lg leading-relaxed max-w-md mb-8">
+                        Dimapur's aesthetic hub for coffee lovers, creatives, and everyone in between. Come for the
+                        coffee, stay for the vibes. ✨
+                    </p>
+
+                    <!-- Social Links -->
+                    <div class="flex items-center gap-4">
+                        <a href="https://www.instagram.com/aprilstudioandcafe" target="_blank" rel="noopener"
+                            class="w-12 h-12 bg-pure-white/10 rounded-full flex items-center justify-center hover:bg-rose hover:text-charcoal transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <h4 class="font-syne font-bold text-xl mb-6 flex items-center gap-2">
+                        <span>📍</span> Find Us
+                    </h4>
+                    <p class="text-pure-white/70 leading-relaxed mb-4">
+                        NH-29, Near HP Petrol Pump<br>
+                        Dimapur, Nagaland
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" rel="noopener"
+                        class="inline-flex items-center gap-2 text-rose hover:text-blush transition-colors">
+                        <span>Get Directions</span>
+                        <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="font-syne font-bold text-xl mb-6 flex items-center gap-2">
+                        <span>🕐</span> Hours
+                    </h4>
+                    <div class="text-pure-white/70 space-y-3">
+                        <div class="flex justify-between">
+                            <span>Mon – Sat</span>
+                            <span class="font-medium text-pure-white">10 AM – 8 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sunday</span>
+                            <span class="font-medium text-rose">Closed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div
+                class="pt-8 border-t border-pure-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-pure-white/50 text-sm">
+                    © 2024 April Studio & Cafe. Made with 💖 in Dimapur
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-pure-white/50 hover:text-pure-white text-sm transition-colors">Privacy</a>
+                    <a href="#" class="text-pure-white/50 hover:text-pure-white text-sm transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>
